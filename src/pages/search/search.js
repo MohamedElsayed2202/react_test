@@ -1,25 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import {useLocation} from 'react-router-dom';
 import InfiniteScroll from "react-infinite-scroll-component";
-import axios from "axios";
 import MovieCard from '../../components/movie/movie';
-const Search = props => {
-    const [movies, setMovies] = useState([]);
+import { useDispatch, useSelector } from 'react-redux';
+import { getSearchedMovies } from '../../store/actions/searchAction';
+import Loader from '../../components/loader/loader';
+
+
+const Search = () => {
+
+    const movies = useSelector((state) => state.searchedMovies.movies);
+
+    const isLoading = useSelector((state) => state.loading.isLoading);
+
     const [page, setPage] = useState(1);
+
     const {search} = useLocation();
-    const searchParams = React.useMemo(()=> new URLSearchParams(search),[search])
-    console.log(searchParams.get('query'));
+
+    const  qq = React.useMemo   (()=> new URLSearchParams(search),[search]).get('query');
+
+    console.log(qq);
+
+    const [q, setQ] = useState(qq)
+    console.log('before',q);
+    
+    console.log('after',q);
+    
+    const dispatch = useDispatch();
+
+
     useEffect(() => {
-        axios.get("https://api.themoviedb.org/3/search/movie", {
-            params: {
-                api_key: "18ebb55ec02cf2ed6553ddd53661fc5f",
-                query: searchParams.get('query'),
-                page: page
-            }
-        })
-            .then((result) => setMovies(movies.concat(result.data.results)))
-            .catch((e) => console.log(e))
-    },[page])
+        console.log(5000, q);
+        
+        dispatch(getSearchedMovies(page, q))
+        setQ(qq);
+    },[page, q])
+
+    useEffect(() => {
+        console.log(10);
+        setQ(qq)
+    },[])
 
     const nextPage = () => {
         let current = page;
@@ -36,8 +56,7 @@ const Search = props => {
                 className={"row justify-content-evenly gap-3 mt-3"}
                 hasMore={true}
             >
-                {movies.map((e, index) => (<MovieCard movie={e} key={index} />))}
-
+                {isLoading? <Loader/> : movies.map((e, index) => (<MovieCard movie={e} key={index} />))}
             </InfiniteScroll>
         </div>
     )

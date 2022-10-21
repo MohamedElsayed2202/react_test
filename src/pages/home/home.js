@@ -1,29 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MovieCard from "../../components/movie/movie";
-
+import { getMovies } from "../../store/actions/moviesAction";
+import Loader from "../../components/loader/loader";
 const Home = props => {
 
     const favs = useSelector((state) => state.favorit.favs);
+    const isLoading = useSelector((state) => state.loading.isLoading);
 
-console.log('hi',favs);
-    const [movies, setMovies] = useState([]);
+
+    console.log('hi',favs);
+
+    const movies = useSelector((state) => state.movies.movies);
     const [page, setPage] = useState(1);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        axios.get("https://api.themoviedb.org/3/movie/popular", {
-            params: {
-                api_key: "18ebb55ec02cf2ed6553ddd53661fc5f",
-                page: page
-            }
-        })
-            .then((response) => {
-                setMovies(movies.concat(response.data.results));
-            })
-            .catch((e) => console.log(e))
-    }, [page]);
+        dispatch(getMovies(page))
+    },[page])
 
 
 
@@ -41,8 +38,8 @@ console.log('hi',favs);
                 className={"row justify-content-evenly gap-3 mt-3"}
                 hasMore={true}
             >
-                {movies.map((e, index) => (<MovieCard movie={e} key={index} />))}
-
+                {isLoading? <Loader/> : movies.map((e, index) => (<MovieCard movie={e} key={index} />))}
+              
             </InfiniteScroll>
         </div>
     );

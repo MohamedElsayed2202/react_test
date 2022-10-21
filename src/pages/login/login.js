@@ -12,6 +12,8 @@ const Login = props => {
                     errors.email = 'Required';
                 } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                     errors.email = 'Invalid email address';
+                } else if(!values.password){
+                    errors.password = 'Required';
                 }
                 return errors
             }}
@@ -25,7 +27,7 @@ const Login = props => {
                 <div className={'login_form'}>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label className='text-info'>Email address</Form.Label>
                         <Form.Control
                             type="email"
                             placeholder="Enter email"
@@ -33,14 +35,14 @@ const Login = props => {
                             onChange={handleChange}
                             onBlur={handelBlur}
                             value={values.email} />
-                        {errors.email && touched.email && errors.email}
+                        {errors.email && touched.email && errors.email ? <p className='text-danger'>{errors.email}</p> : <></>}
                         {/* <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
                         </Form.Text> */}
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label className='text-info'>Password</Form.Label>
                         <Form.Control type="password"
                             placeholder="Password"
                             name="password"
@@ -48,7 +50,7 @@ const Login = props => {
                             onBlur={handelBlur}
                             value={values.password}
                         />
-                         {errors.password && touched.password && errors.password}
+                         {errors.password && touched.password && errors.password ? <p className='text-danger'>{errors.password}</p> : <></>}
                     </Form.Group>
                     {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="Check me out" />

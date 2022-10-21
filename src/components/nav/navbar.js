@@ -16,7 +16,7 @@ const NavBar = props => {
     return (
         <nav className={"navbar sticky-top navbar-expand-lg navbar-dark bg-dark"}>
             <div className={"container-fluid"}>
-                <NavLink activeClassName="text-danger" className={"navbar-brand"} to="/">Movies</NavLink>
+                <NavLink className={"navbar-brand"} to="/">Movies</NavLink>
                 <button className={"navbar-toggler"} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className={"navbar-toggler-icon"}></span>
                 </button>
@@ -28,6 +28,9 @@ const NavBar = props => {
                         </li>
                         <li className={"nav-item"}>
                             <NavLink activeClassName="text-danger" className={"nav-link"} to="/login">Login</NavLink>
+                        </li>
+                        <li className={"nav-item"}>
+                            <NavLink activeClassName="text-danger" className={"nav-link"} to="/register">Register</NavLink>
                         </li>
                     </ul>
                     <form className={"d-flex"} onSubmit={(e) => search(e)}>

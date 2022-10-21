@@ -1,13 +1,16 @@
 .card-view {
+    cursor: pointer;
     position: relative;
     width: 265px !important;
     background-color: white;
     padding: 0 !important;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    ;
+    
 }
 
 .favbtn {
+    user-select: none;
+    cursor: pointer;
     z-index: 1;
     position: absolute;
     top: 5px;

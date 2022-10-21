@@ -25,11 +25,11 @@ const Details = () => {
     },[])
     return(
         <div className={"container-fluid"}>
-        <div className={"row justify-content-center align-items-center mt-4 "}>
+        <div className={"row justify-content-center align-items-center mt-5 h-100"}>
             <div className={"back-image"}style={{backgroundImage: `url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${movieDetails.backdrop_path})`}}>
                 <div className={"mask d-flex justify-content-center align-items-center"}>
-                    <div className={"p-5 content d-flex flex-xxl-row flex-xl-row flex-lg-row flex-md-row flex-sm-column flex-column align-items-center"}>
-                        <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} width={'300px'} height={'510px'}/>
+                    <div className={"p-5 d-flex flex-xxl-row flex-xl-row flex-lg-row flex-md-row flex-sm-column flex-column align-items-center"}>
+                        <img className="poster-img"src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}/>
                         <div className={"ps-5"}>
                             <h2 className="text-white">{movieDetails.title}<span className="text-secondary"> ({year})</span></h2>
                             <p className="text-white fs-4"><i>{movieDetails.tagline}</i></p>
