@@ -9,11 +9,12 @@ import { useHistory } from 'react-router-dom';
 const MovieCard = props => {
 
     const favs = useSelector((state) => state.favorit.favs);
+
     const dispatch = useDispatch();
+
     const history = useHistory();
     const add = (e) => {
         e.stopPropagation();
-        console.log(55);
         dispatch(addToFav(props.movie))
     }
     return (

@@ -8,8 +8,6 @@ import Loader from "../../components/loader/loader";
 const Home = props => {
 
     const favs = useSelector((state) => state.favorit.favs);
-    const isLoading = useSelector((state) => state.loading.isLoading);
-
 
     console.log('hi',favs);
 
@@ -37,8 +35,9 @@ const Home = props => {
                 next={nextPage}
                 className={"row justify-content-evenly gap-3 mt-3"}
                 hasMore={true}
+                loader={<Loader/>}
             >
-                {isLoading? <Loader/> : movies.map((e, index) => (<MovieCard movie={e} key={index} />))}
+                {movies.map((e, index) => (<MovieCard movie={e} key={index} />))}
               
             </InfiniteScroll>
         </div>

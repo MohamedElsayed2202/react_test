@@ -6,7 +6,7 @@ export default function favoritReducer(state=INITIAL_VALUE, action){
     let newVal
     if(action.payload !== undefined){
         if(state.favs.includes(action.payload)){
-            newVal = state.favs.filter(el => el.id !== action.payload.id);
+            newVal = state.favs.filter(el => el.id !== action.payload.id); // action.payload.id === movie.id
         }
         else{
             newVal = [...state.favs];
